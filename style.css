@@ -1,0 +1,112 @@
+/* Import a Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.about-section {
+    background-color: #ffffff;
+    /* A clean white background to separate it */
+}
+
+.about-image {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.about-image:hover {
+    transform: scale(1.03);
+    /* Slightly enlarge the image on hover */
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.icon-feature {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    /* Prevents the icon circle from shrinking */
+    font-size: 1.5rem;
+}
+
+.card-img-top {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.product-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+#cart-icon-wrapper {
+    cursor: pointer;
+}
+
+footer a {
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: grey !important;
+}
+
+/* --- NEW CSS FOR THE REMOVE BUTTON --- */
+.remove-from-cart-btn i {
+    pointer-events: none;
+    /* This ensures a click on the icon is treated as a click on the button */
+}
+
+.w-45 {
+    width: 45%;
+}
+
+.modal-content {
+    animation: fadeSlideUp 0.3s ease-in-out;
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.auth-toggle {
+    background-color: #e9ecef;
+    border-radius: 50rem;
+    padding: 0.25rem;
+    border: 1px solid #dee2e6;
+}
+
+.auth-toggle .nav-link {
+    color: #6c757d;
+    border-radius: 50rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.auth-toggle .nav-link.active {
+    background-color: #fff;
+    color: #0d6efd;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChronoStrap - Bootstrap Edition</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="#">ChronoStrap</a>
+            <div class="d-flex align-items-center">
+                <a href="#" class="nav-link me-4" id="user-icon-link">
+                    <i class="fas fa-user fs-5"></i>
+                </a>
+                <a href="#" class="nav-link position-relative" id="cart-icon-wrapper">
+                    <i class="fas fa-shopping-cart fs-5"></i>
+                    <span id="cart-count"
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- =================================================================
+     NEW SIGN IN / SIGN UP MODAL - PASTE THIS ENTIRE BLOCK
+     ================================================================= -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authModalLabel">Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-pills nav-fill mb-4 auth-toggle" id="authTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="signin-tab" data-bs-toggle="tab"
+                                data-bs-target="#signin-pane" type="button" role="tab" aria-controls="signin-pane"
+                                aria-selected="true">Sign In</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup-pane"
+                                type="button" role="tab" aria-controls="signup-pane" aria-selected="false">Sign
+                                Up</button>
+                        </li>
+                    </ul>
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="authTabContent">
+                        <!-- Sign In Pane -->
+                        <div class="tab-pane fade show active" id="signin-pane" role="tabpanel"
+                            aria-labelledby="signin-tab" tabindex="0">
+                            <form id="signInForm">
+                                <div class="mb-3">
+                                    <label for="signInEmail" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="signInEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signInPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="signInPassword" required>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    </div>
+                                    <a href="#" class="small">Forgot password?</a>
+                                </div>
+                                <button type="submit" class="btn btn-info text-white w-100">Sign In</button>
+                            </form>
+                        </div>
+
+                        <!-- Sign Up Pane -->
+                        <div class="tab-pane fade" id="signup-pane" role="tabpanel" aria-labelledby="signup-tab"
+                            tabindex="0">
+                            <form id="signUpForm">
+                                <div class="mb-3">
+                                    <label for="signUpName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="signUpName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signUpEmail" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="signUpEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signUpPassword" class="form-label">Create Password</label>
+                                    <input type="password" class="form-control" id="signUpPassword" required>
+                                </div>
+                                <button type="submit" class="btn btn-info text-white w-100">Create Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="about-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Image Column -->
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.stockcake.com/public/d/8/3/d83a6ab7-d1d8-42a2-86a0-45cc500f32c9_large/precision-watchmaking-art-stockcake.jpg"
+                        alt="Watchmaker crafting a timepiece" class="img-fluid rounded-3 shadow-lg about-image">
+                </div>
+                <!-- Text Column -->
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3">Crafting Moments, Not Just Timepieces</h1>
+                    <p class="lead text-muted">
+                        At ChronoStrap, we believe a watch is more than an instrument for telling time. It's a legacy,
+                        an heirloom, and a testament to meticulous craftsmanship. We travel the globe to curate a
+                        collection that represents the pinnacle of horological artistry.
+                    </p>
+
+                    <!-- Feature Icons -->
+                    <div class="row mt-4">
+                        <div class="col-md-6 d-flex align-items-start mb-3">
+                            <div class="icon-feature bg-info text-white me-3">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold">Unrivaled Quality</h5>
+                                <p class="text-muted small">Every watch is inspected for perfection and authenticity.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-start mb-3">
+                            <div class="icon-feature bg-info text-white me-3">
+                                <i class="fas fa-pencil-ruler"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold">Timeless Design</h5>
+                                <p class="text-muted small">A collection that balances classic elegance with modern
+                                    innovation.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#product-grid" class="btn btn-info btn-lg mt-3 text-white">Explore The Collection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Main Content -->
+    <main class="container my-5" id="shop">
+        <h1 class="display-4 text-center mb-5">Our Exquisite Collection</h1>
+
+        <!-- Product Grid -->
+        <div class="row g-4" id="product-grid">
+            <!-- Products will be dynamically inserted here, but here's an example card structure -->
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=1888"
+                        class="card-img-top" alt="Classic Chrono">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Classic Chrono</h5>
+                        <p class="card-text fw-bold text-success fs-5 mt-auto">Rs 299.99</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-info add-to-cart text-white" data-id="1" data-name="Classic Chrono"
+                                data-price="299.99">Add to Cart</button>
+                            <button class="btn btn-outline-success buy-now-btn" data-id="1" data-price="299.99">Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <img src="https://cdn.shopify.com/s/files/1/0665/0475/3316/files/franklord-open-heart-midnight-steel-watch-front-view.jpg?v=1734887243"
+                        class="card-img-top" alt="Midnight Steel">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Midnight Steel</h5>
+                        <p class="card-text fw-bold text-success fs-5 mt-auto">Rs 450.00</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-info add-to-cart text-white" data-id="2" data-name="Midnight Steel"
+                                data-price="450.00">Add to Cart</button>
+                            <button class="btn btn-outline-success buy-now-btn" data-id="2" data-price="450.00">Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <img src="https://www.mnmlst.in/cdn/shop/files/20220924150525_IMG_3298_868bdb1a-c240-4e76-8f65-8b8b61bf1f94.jpg?v=1709104036&width=1000"
+                        class="card-img-top" alt="Rose Gold Elegance">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Rose Gold Elegance</h5>
+                        <p class="card-text fw-bold text-success fs-5 mt-auto">Rs 525.50</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-info add-to-cart text-white" data-id="3"
+                                data-name="Rose Gold Elegance" data-price="525.50">Add to Cart</button>
+                            <button class="btn btn-outline-success buy-now-btn" data-id="3" data-price="525.50">Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <img src="https://images.unsplash.com/photo-1533139502658-0198f920d8e8?q=80&w=1887"
+                        class="card-img-top" alt="Titanium Diver">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Titanium Diver</h5>
+                        <p class="card-text fw-bold text-success fs-5 mt-auto">Rs 799.00</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-info add-to-cart text-white" data-id="4" data-name="Titanium Diver"
+                                data-price="799.00">Add to Cart</button>
+                            <button class="btn btn-outline-success buy-now-btn" data-id="4" data-price="799.00">Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <img src="https://consumer.huawei.com/content/dam/huawei-cbg-site/common/mkt/plp-x/wearables-v5/product-shelf-and-pop-up/watch-ultimate-series/watch-ultimate-series-kv-poster.jpg"
+                        class="card-img-top" alt="Huawei Watch">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Huawei prem</h5>
+                        <p class="card-text fw-bold text-success fs-5 mt-auto">Rs 1111.11</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-info add-to-cart text-white" data-id="5" data-name="Huawei prem"
+                                data-price="1111.11">Add to Cart</button> <!-- FIXED PRICE -->
+                            <button class="btn btn-outline-success buy-now-btn" data-id="5" data-price="1111.11">Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <img src="https://api.thewosgroup.com/medias/Rolex-Oyster-Perpetual.png?context=bWFzdGVyfHJvb3R8MzE0MTg3fGltYWdlL3BuZ3xhR1prTDJnMVl5ODVNRGszTWpRd09UTTJORGM0TG5CdVp3fDhlMWI4MWE1ZjA0ZjVjMzAyODYzNDk2MTQ3Y2ViYzRhZTJlZmNhMWEwNzdjNDRlMmYyMzg2NGMwZWFiZDc2NjU"
+                        class="card-img-top" alt="Rolex Oyster Perpetual">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Rolex Oyster Perpetual</h5>
+                        <p class="card-text fw-bold text-success fs-5 mt-auto">Rs 9999.99</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-info add-to-cart text-white" data-id="6"
+                                data-name="Rolex Oyster Perpetual" data-price="9999.99">Add to Cart</button>
+                            <button class="btn btn-outline-success buy-now-btn" data-id="6" data-price="9999.00">Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <img src="https://image-us.samsung.com/us/watches/galaxy-watch8/images/ultra/galaxy-watch-ultra-2025-catch-the-highlights-titanium-endframe-mo.jpg?imbypass=true"
+                        class="card-img-top" alt="Galaxy Watch8">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Galaxy Watch8</h5>
+                        <p class="card-text fw-bold text-success fs-5 mt-auto">Rs 499.00</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-info add-to-cart text-white" data-id="7" data-name="Galaxy Watch8"
+                                data-price="499.00">Add to Cart</button>
+                            <button class="btn btn-outline-success buy-now-btn" data-id="7" data-price="499.00">Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <img src="https://mygemma.com/cdn/shop/articles/NEW-WPD-BLOG-Top-Image_7b206887-7c53-41fa-bba5-b836ec9f2ba2.png?v=1743687427"
+                        class="card-img-top" alt="Rolex Submariner">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Rolex Submariner</h5>
+                        <p class="card-text fw-bold text-success fs-5 mt-auto">Rs 899.00</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-info add-to-cart text-white" data-id="8" data-name="Rolex Submariner"
+                                data-price="899.00">Add to Cart</button>
+                            <button class="btn btn-outline-success buy-now-btn" data-id="8" data-price="899.00">Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Your Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="cart-items-list" class="list-group list-group-flush">
+                        <!-- Cart items will be injected here -->
+                        <li class="list-group-item text-center text-muted">Your cart is empty.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <p class="me-auto fs-5 fw-bold">Total: <span id="cart-total-price">Rs. 0.00</span></p>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                    <button type="button" class="btn btn-info text-white" id="checkout-btn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container text-center text-md-start">
+            <div class="row">
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-info">ChronoStrap</h5>
+                    <p>Curating the world's finest timepieces for the modern connoisseur. Quality, precision, and style
+                        delivered to your wrist.</p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold">Links</h5>
+                    <p><a href="#" class="text-white">Home</a></p>
+                    <p><a href="#shop" class="text-white">Shop</a></p>
+                    <p><a href="#" class="text-white">About Us</a></p>
+                    <p><a href="#" class="text-white">Contact</a></p>
+                </div>
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold">Follow Us</h5>
+                    <a href="#" class="btn btn-info btn-floating m-1"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="btn btn-info btn-floating m-1"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="btn btn-info btn-floating m-1"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="btn btn-info btn-floating m-1"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p>© 2024 ChronoStrap. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST" id="esewa-payment-form"
+        style="display: none;">
+        <input type="hidden" id="amount" name="amount" required>
+        <input type="hidden" id="tax_amount" name="tax_amount" value="0" required>
+        <input type="hidden" id="total_amount" name="total_amount" required>
+        <input type="hidden" id="transaction_uuid" name="transaction_uuid" required>
+        <input type="hidden" id="product_code" name="product_code" value="EPAYTEST" required>
+        <input type="hidden" id="product_service_charge" name="product_service_charge" value="0" required>
+        <input type="hidden" id="product_delivery_charge" name="product_delivery_charge" value="0" required>
+        <input type="hidden" id="success_url" name="success_url" value="https://developer.esewa.com.np/success"
+            required>
+        <input type="hidden" id="failure_url" name="failure_url" value="https://developer.esewa.com.np/failure"
+            required>
+        <input type="hidden" id="signed_field_names" name="signed_field_names"
+            value="total_amount,transaction_uuid,product_code" required>
+        <input type="hidden" id="signature" name="signature" required>
+    </form>
+
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>
