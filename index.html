@@ -35,9 +35,7 @@
             </div>
         </div>
     </nav>
-    <!-- =================================================================
-     NEW SIGN IN / SIGN UP MODAL - PASTE THIS ENTIRE BLOCK
-     ================================================================= -->
+
     <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -301,29 +299,45 @@
         </div>
     </main>
 
-    <!-- Cart Modal -->
     <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cartModalLabel">Your Shopping Cart</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- wider modal -->
+            <div class="modal-content shadow-lg border-0 rounded-4"> <!-- soft shadow, rounded corners -->
+
+                <div class="modal-header bg-info text-white border-0 rounded-top-4">
+                    <h5 class="modal-title fw-bold" id="cartModalLabel">
+                        <i class="bi bi-cart3 me-2"></i>Your Shopping Cart
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+
+                <div class="modal-body p-4 bg-light">
                     <ul id="cart-items-list" class="list-group list-group-flush">
                         <!-- Cart items will be injected here -->
-                        <li class="list-group-item text-center text-muted">Your cart is empty.</li>
+                        <li class="list-group-item text-center text-muted fst-italic py-4">
+                            Your cart is empty.
+                        </li>
                     </ul>
                 </div>
-                <div class="modal-footer">
-                    <p class="me-auto fs-5 fw-bold">Total: <span id="cart-total-price">Rs. 0.00</span></p>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
-                    <button type="button" class="btn btn-info text-white" id="checkout-btn">Proceed to Checkout</button>
+
+                <div
+                    class="modal-footer border-0 bg-white d-flex justify-content-between align-items-center rounded-bottom-4 py-3">
+                    <p class="fs-5 fw-semibold mb-0">
+                        Total: <span id="cart-total-price" class="text-info">Rs. 0.00</span>
+                    </p>
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">
+                            <i class="bi bi-arrow-left-circle me-1"></i>Continue Shopping
+                        </button>
+                        <button type="button" class="btn btn-info text-white fw-semibold" id="checkout-btn">
+                            <i class="bi bi-check2-circle me-1"></i>Proceed to Checkout
+                        </button>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
-
     <!-- Footer -->
     <footer class="bg-dark text-white pt-5 pb-4">
         <div class="container text-center text-md-start">
